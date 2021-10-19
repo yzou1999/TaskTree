@@ -8,7 +8,7 @@ function forgot() {
                 <label>Email Address: </label>
                 <input name = "email" type = "email" align = "middle" ></input>
                 <br/><br/>
-                <input type = "submit" value = "enter"></input>
+                <input type = "submit" value = "entertest"></input>
             </form>
         </div>
     )
