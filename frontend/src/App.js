@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import register from './components/registerPage';
 import login from './components/loginPage';
+import forgot from './components/forgotPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <br/> */}
         <Route path="/" exact component = {login} />
         <Route path="/register" exact component = {register} />
+        <Route path="/forgot" exact component = {forgot} />
       </div>
     </Router>
   );

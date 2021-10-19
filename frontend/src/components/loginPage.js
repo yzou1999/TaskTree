@@ -18,9 +18,9 @@ function login() {
                 <a href = "\register">Register</a>
             </div>
             <br/><br/>
-            <form align="middle" method="post" action="/forgot_button_form">
-			    <input type="submit" value="Forgot"></input>
-		    </form>	
+            <div align = "middle">
+                <a href = "\forgot">Forgot password</a>
+            </div>
         </div>
     );
 }
