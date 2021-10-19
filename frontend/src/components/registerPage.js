@@ -16,7 +16,7 @@ function register() {
                 <br/><br/>
                 <input type = "submit" value = "enter"></input>
             </form>
-            <a href = "/">Login in Now</a>
+            <a align = "middle" href = "/">Login in Now</a>
         </div>
     );
 }
