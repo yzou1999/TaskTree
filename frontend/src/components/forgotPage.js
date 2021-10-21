@@ -1,6 +1,6 @@
 import React from "react";
 
-function forgot() {
+function Forgot() {
     return (
         <div className = "forgotContainer">
             <h1 align = "middle">Forgot Form</h1>
@@ -14,4 +14,4 @@ function forgot() {
     )
 }
 
-export default forgot;
+export default Forgot;
