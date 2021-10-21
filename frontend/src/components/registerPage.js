@@ -1,6 +1,6 @@
 import React from "react";
 
-function register() {
+function Register() {
     return (
         <div className = "registerContainer">
             <h1 align = "middle">Register form</h1>
@@ -21,4 +21,4 @@ function register() {
     );
 }
 
-export default register;
+export default Register;
