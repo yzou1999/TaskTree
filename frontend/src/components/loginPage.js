@@ -21,6 +21,9 @@ function login() {
             <div align = "middle">
                 <a href = "\forgot">Forgot password</a>
             </div>
+            <div align = "middle">
+                <a href = "\dashboardlist">Dashboard</a>
+            </div>
         </div>
     );
 }
