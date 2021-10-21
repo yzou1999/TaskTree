@@ -7,6 +7,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import register from './components/registerPage';
 import login from './components/loginPage';
 import forgot from './components/forgotPage';
+import dashboard from './components/Dashboard.js';
+import Dashboardform from './components/Dashboardform';
+import DashboardList from './components/DashboardList';
+import Dashboard from './components/Dashboard.js';
 
 function App() {
   return (
@@ -20,6 +24,9 @@ function App() {
         <Route path="/" exact component = {login} />
         <Route path="/register" exact component = {register} />
         <Route path="/forgot" exact component = {forgot} />
+        <Route path="/dashboard" exact component = {Dashboard} />
+        <Route path="/dashboardform" exact component = {Dashboardform} />
+        <Route path="/dashboardlist" exact component = {DashboardList} />
       </div>
     </Router>
   );
