@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function Login(props) {
     const [username, setUsername] = useState("");
@@ -8,9 +9,11 @@ function Login(props) {
         e.preventDefault();
 
         const user = {
-            username: {username},
-            password: {password}
+            username: username,
+            password: password
         }
+        axios.post('http://localhost:5000/loggin/add',user)
+            .then(res => console.log(res.data));
 
         console.log({user});
     }
