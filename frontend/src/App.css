@@ -44,7 +44,7 @@
   justify-content: start;
   width: 1280px;
   min-height: 1920px;
-  background: #19991fb4;
+  background: #A6CEB6;
   text-align: center;
   margin: 0px auto;
   border-radius: 10px;
@@ -53,7 +53,7 @@
 
 .task-app h1 {
   margin: 32px 0;
-  color: #fff;
+  color: rgb(99, 42, 4);
   font-size: 24px;
 }
 
@@ -70,11 +70,11 @@
   outline: none;
   width: 320px;
   background: transparent;
-  color: #fff;
+  color: #005c17;
 }
 
 .task-input::placeholder {
-  color: #e2e2e2;
+  color: #005c17;
 }
 
 .task-button {
@@ -93,14 +93,14 @@
 }
 
 .task-input.edit {
-  border: 2px solid #149fff;
+  border: 2px solid #ff6a14;
 }
 
 .task-button.edit {
   background: linear-gradient(
     90deg,
-    rgba(20, 159, 255, 1) 0%,
-    rgba(17, 122, 255, 1) 100%
+    rgb(255, 67, 20) 0%,
+    rgb(255, 17, 17) 100%
   );
   padding: 16px 22px;
 }
