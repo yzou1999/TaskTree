@@ -293,8 +293,6 @@ function Login(props) {
         </div>
       </div>
       <div align = "middle">
-                 <a href = "\dashboardlist">Dashboard</a>
-       </div>
     </Grid>
   );
 }
