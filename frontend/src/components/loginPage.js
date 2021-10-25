@@ -71,9 +71,9 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
       localStorage.setItem('id_token', 1)
       setError(null)
       setIsLoading(false)
-      dispatch({ type: 'LOGIN_SUCCESS' })
+      //dispatch({ type: 'LOGIN_SUCCESS' })
 
-      history.push('/dashboard')
+      history.push('/DashboardList')
     }, 2000);
   } else {
     dispatch({ type: "LOGIN_FAILURE" });
@@ -85,7 +85,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
 function signOut(dispatch, history) {
   localStorage.removeItem("id_token");
   dispatch({ type: "SIGN_OUT_SUCCESS" });
-  history.push("/login");
+  history.push("/login"); // or just /??
 }
 
 
@@ -131,7 +131,7 @@ function Login(props) {
               
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
+                  Something is wrong with your login or password
                 </Typography>
               </Fade>
               <TextField
@@ -145,7 +145,7 @@ function Login(props) {
                 value={loginValue}
                 onChange={e => setLoginValue(e.target.value)}
                 margin="normal"
-                placeholder="Email Adress"
+                placeholder="Email Address"
                 type="email"
                 fullWidth
               />
@@ -194,7 +194,7 @@ function Login(props) {
                   size="large"
                   className={classes.forgetButton}
                 >
-                  Forget Password
+                  Forgot Password
                 </Button>
               </div>
             </React.Fragment>
@@ -209,7 +209,7 @@ function Login(props) {
               </Typography>
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
+                  Something is wrong with your login or password
                 </Typography>
               </Fade>
               <TextField
@@ -292,6 +292,9 @@ function Login(props) {
           )}
         </div>
       </div>
+      <div align = "middle">
+                 <a href = "\dashboardlist">Dashboard</a>
+       </div>
     </Grid>
   );
 }
