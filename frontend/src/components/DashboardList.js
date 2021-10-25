@@ -43,7 +43,7 @@ function DashboardList() {
     }
 
     return (
-        <div>
+        <div className ='task-app'>
             <h1>Tasks to be completed!</h1>
             <Dashboardform onSubmit={addTask} />
             <Dashboard 
