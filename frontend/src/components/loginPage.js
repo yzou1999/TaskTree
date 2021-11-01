@@ -73,7 +73,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
       setIsLoading(false)
       dispatch({ type: 'LOGIN_SUCCESS' })
 
-      history.push('/dashboard')
+      history.push('/Dashboardform')
     }, 2000);
   } else {
     dispatch({ type: "LOGIN_FAILURE" });
