@@ -9,8 +9,8 @@ import {
   TextField,
   Fade,
 } from "@material-ui/core";
-
 // styles
+
 import useStyles from "./styles";
 
 // context
@@ -68,12 +68,16 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
 
   if (!!login && !!password) {
     setTimeout(() => {
-      localStorage.setItem('id_token', 1)
-      setError(null)
-      setIsLoading(false)
-      dispatch({ type: 'LOGIN_SUCCESS' })
+      localStorage.setItem("id_token", 1);
+      setError(null);
+      setIsLoading(false);
+      //dispatch({ type: 'LOGIN_SUCCESS' })
+
 
       history.push('/Dashboardform')
+
+      history.push("/DashboardList");
+
     }, 2000);
   } else {
     dispatch({ type: "LOGIN_FAILURE" });
@@ -85,9 +89,8 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
 function signOut(dispatch, history) {
   localStorage.removeItem("id_token");
   dispatch({ type: "SIGN_OUT_SUCCESS" });
-  history.push("/login");
+  history.push("/login"); // or just /??
 }
-
 
 function Login(props) {
   var classes = useStyles();
@@ -123,15 +126,15 @@ function Login(props) {
           {activeTabId === 0 && (
             <React.Fragment>
               <Typography variant="h1" className={classes.greeting}>
-              Welcome Back!
+                Welcome Back!
               </Typography>
               <Typography variant="h5" className={classes.greeting}>
-              Enter your email and password to log back in!
+                Enter your email and password to log back in!
               </Typography>
-              
+
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
+                  Something is wrong with your login or password
                 </Typography>
               </Fade>
               <TextField
@@ -143,9 +146,9 @@ function Login(props) {
                   },
                 }}
                 value={loginValue}
-                onChange={e => setLoginValue(e.target.value)}
+                onChange={(e) => setLoginValue(e.target.value)}
                 margin="normal"
-                placeholder="Email Adress"
+                placeholder="Email Address"
                 type="email"
                 fullWidth
               />
@@ -158,7 +161,7 @@ function Login(props) {
                   },
                 }}
                 value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
+                onChange={(e) => setPasswordValue(e.target.value)}
                 margin="normal"
                 placeholder="Password"
                 type="password"
@@ -179,7 +182,7 @@ function Login(props) {
                         passwordValue,
                         props.history,
                         setIsLoading,
-                        setError,
+                        setError
                       )
                     }
                     variant="contained"
@@ -194,7 +197,7 @@ function Login(props) {
                   size="large"
                   className={classes.forgetButton}
                 >
-                  Forget Password
+                  Forgot Password
                 </Button>
               </div>
             </React.Fragment>
@@ -209,7 +212,7 @@ function Login(props) {
               </Typography>
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
+                  Something is wrong with your login or password
                 </Typography>
               </Fade>
               <TextField
@@ -221,7 +224,7 @@ function Login(props) {
                   },
                 }}
                 value={nameValue}
-                onChange={e => setNameValue(e.target.value)}
+                onChange={(e) => setNameValue(e.target.value)}
                 margin="normal"
                 placeholder="Full Name"
                 type="text"
@@ -236,7 +239,7 @@ function Login(props) {
                   },
                 }}
                 value={loginValue}
-                onChange={e => setLoginValue(e.target.value)}
+                onChange={(e) => setLoginValue(e.target.value)}
                 margin="normal"
                 placeholder="Email Address"
                 type="email"
@@ -251,7 +254,7 @@ function Login(props) {
                   },
                 }}
                 value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
+                onChange={(e) => setPasswordValue(e.target.value)}
                 margin="normal"
                 placeholder="Password"
                 type="password"
@@ -269,7 +272,7 @@ function Login(props) {
                         passwordValue,
                         props.history,
                         setIsLoading,
-                        setError,
+                        setError
                       )
                     }
                     disabled={
@@ -287,14 +290,11 @@ function Login(props) {
                   </Button>
                 )}
               </div>
-              
             </React.Fragment>
           )}
         </div>
       </div>
-      <div align = "middle">
-                <a href = "\dashboardlist">Dashboard</a>
-      </div>
+      <div align="middle" />
     </Grid>
   );
 }
