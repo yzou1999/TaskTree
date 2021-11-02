@@ -11,6 +11,9 @@ import dashboard from './components/Dashboard.js';
 import Dashboardform from './components/Dashboardform';
 import DashboardList from './components/DashboardList';
 import Dashboard from './components/Dashboard.js';
+import Modal from "react-modal";
+import "react-datetime/css/react-datetime.css";
+import Calendar from './components/Calendar';
 
 function App() {
   return (
@@ -27,6 +30,7 @@ function App() {
         <Route path="/dashboard" exact component = {Dashboard} />
         <Route path="/dashboardform" exact component = {Dashboardform} />
         <Route path="/dashboardlist" exact component = {DashboardList} />
+        <Route path="/calendar" exact component = {Calendar} />
       </div>
     </Router>
   );
