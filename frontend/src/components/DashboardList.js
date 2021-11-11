@@ -48,8 +48,10 @@ function DashboardList() {
             <Dashboardform onSubmit={addTask} />
             <Dashboard 
             tasks={tasks} completeTask={completeTask} removeTask={removeTask} updateTask ={updateTask}/>
+            <a href = "\calendar">Calendar</a>
             
         </div>
+        
     )
 }
 

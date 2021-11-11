@@ -37,12 +37,15 @@ function Dashboardform(props) {
                 onChange={handleChange}
                 ref={inputRef}
             />
-            <button onClick={handleSubmit} className="task-button edit">Update</button>
+            <button id="test" onClick={handleSubmit} className="task-button edit">Update</button>
             </>
             ) :
             (
             <>
+            <label htmlFor="new-task">What needs to be done?</label>
+            <br />
             <input 
+                id="new-task"
                 type="text" 
                 placeholder="Add a task" 
                 value={input}
