@@ -11,7 +11,7 @@ module.exports = function registerValidation(user) {
 
   //checking for if the user inputted name
   if (validator.isEmpty(user.username)) {
-    errors.name = "username required";
+    errors.username = "username required";
   }
 
   //checking if email input is filled and if it is valid

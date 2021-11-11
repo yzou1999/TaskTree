@@ -9,7 +9,7 @@ module.exports = function loginValidation(user) {
 
   //checking for if the user inputted name
   if (validator.isEmpty(user.username)) {
-    errors.username = "Name required";
+    errors.username = "username required";
   }
 
   //check password

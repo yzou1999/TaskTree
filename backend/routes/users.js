@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const registerValidation = require("../validation/register.js");
 const loginValidation = require("../validation/login.js");
 const keys = require("../config/keys.js");
+const passport = require("passport");
 
 router.route("/").get((req, res) => {
   User.find()
