@@ -292,7 +292,6 @@ function Login(props) {
           )}
         </div>
       </div>
-      <div align = "middle">
     </Grid>
   );
 }
