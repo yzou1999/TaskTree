@@ -91,9 +91,9 @@ class Login extends Component {
           <input type="submit" value="Log In"></input>
         </form>
         <Link to="" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> 
-              Don't have an account? Sign Up
-            </Link>
+          <i className="material-icons left">keyboard_backspace</i>
+          Don't have an account? Sign Up
+        </Link>
       </div>
     );
   }
