@@ -8,20 +8,8 @@ const keys = require("../config/keys.js");
 const passport = require("passport");
 
 router.route("/").get((req, res) => {
-  User.find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json("error"));
-});
-
-router.route("/add").post((req, res) => {
-  console.log("here");
-  const username = req.body.username;
-  const password = req.body.password;
-  const newUser = new User({ username, password });
-  newUser
-    .save()
-    .then(() => res.json("user added"))
-    .catch((err) => res.status(400).json("error"));
+  User.find().then((users) => res.json(users));
+  //.catch((err) => res.status(400).json("error"));
 });
 
 router.route("/register").post((req, res) => {
@@ -62,7 +50,6 @@ router.route("/register").post((req, res) => {
       });
     }
   });
-  console.log("aqui");
 });
 
 router.post("/login", (req, res) => {
