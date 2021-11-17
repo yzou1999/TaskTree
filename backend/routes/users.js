@@ -6,22 +6,11 @@ const registerValidation = require("../validation/register.js");
 const loginValidation = require("../validation/login.js");
 const keys = require("../config/keys.js");
 const passport = require("passport");
+const isEmpty = require("is-empty");
 
 router.route("/").get((req, res) => {
-  User.find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json("error"));
-});
-
-router.route("/add").post((req, res) => {
-  console.log("here");
-  const username = req.body.username;
-  const password = req.body.password;
-  const newUser = new User({ username, password });
-  newUser
-    .save()
-    .then(() => res.json("user added"))
-    .catch((err) => res.status(400).json("error"));
+  User.find().then((users) => res.json(users));
+  //.catch((err) => res.status(400).json("error"));
 });
 
 router.route("/register").post((req, res) => {
@@ -33,36 +22,52 @@ router.route("/register").post((req, res) => {
     //return 400 status and the type of errors that occured in json format
     return res.status(400).json(errors);
   }
-
+  if (req.body.password.length < 3) {
+    return res.status(400).json({ password: "password is too short" });
+  }
   //trying to find if the user already exist in the database, if exist, return error
   //elses make a new user in database and save the new user
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
-      return res.status(400).json({ email: "Email already exist" });
-    } else {
-      //create the new user
-      const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
+      User.findOne({ username: req.body.username }).then((user) => {
+        if (user) {
+          return res.status(400).json({
+            email: "Email already exist",
+            username: "username already exist",
+          });
+        } else {
+          return res.status(400).json({ email: "Email already exist" });
+        }
       });
+    } else {
+      User.findOne({ username: req.body.username }).then((user) => {
+        if (user) {
+          return res.status(400).json({ username: "username already exist" });
+        } else {
+          //create the new user
+          const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+          });
 
-      //saves the user in the database with hashed passwords for encryption
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) {
-            throw err;
-          }
-          newUser.password = hash;
-          newUser
-            .save()
-            .then((user) => res.json(user))
-            .catch((err) => console.log(err));
-        });
+          //saves the user in the database with hashed passwords for encryption
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) {
+                throw err;
+              }
+              newUser.password = hash;
+              newUser
+                .save()
+                .then((user) => res.json(user))
+                .catch((err) => console.log(err));
+            });
+          });
+        }
       });
     }
   });
-  console.log("aqui");
 });
 
 router.post("/login", (req, res) => {

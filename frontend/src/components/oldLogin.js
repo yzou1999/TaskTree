@@ -47,9 +47,10 @@ class Login extends Component {
     const { errors } = this.state;
     console.log(errors);
     console.log(this.state.errors);
+
     return (
       <div className="container">
-        <h1 style={{ color: "blue" }} align="middle">
+        <h1 style={{ color: "#A6CEB6" }} align="middle">
           Login form
         </h1>
         <form align="middle" onSubmit={this.onSubmit}>
@@ -87,8 +88,12 @@ class Login extends Component {
           </span>
           <br />
           <br />
-          <input type="submit" value="enter"></input>
+          <input type="submit" value="Log In"></input>
         </form>
+        <Link to="" className="btn-flat waves-effect">
+              <i className="material-icons left">keyboard_backspace</i> 
+              Don't have an account? Sign Up
+            </Link>
       </div>
     );
   }
