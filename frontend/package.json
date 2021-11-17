@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@fullcalendar/daygrid": "^5.10.0",
     "@fullcalendar/react": "^5.10.0",
@@ -24,7 +24,6 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
-
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -33,10 +32,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
-
-  "proxy": "http://localhost:5000/",
-
   "eslintConfig": {
     "extends": [
       "react-app",

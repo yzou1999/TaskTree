@@ -44,8 +44,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div 
-        className="container">
+        <div className="container">
           {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link to="/" className="navbar-brand">MERN-Stack Todo App</Link>
             <Link to="/register" className="nav-link">register Page</Link>
