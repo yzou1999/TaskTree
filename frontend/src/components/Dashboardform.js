@@ -42,6 +42,9 @@ function Dashboardform(props) {
             ) :
             (
             <>
+            <label htmlFor="new-task">What needs to be done?</label>
+            <br />
+
             <input 
                 type="text" 
                 placeholder="Add a task" 
