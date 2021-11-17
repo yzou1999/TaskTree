@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@fullcalendar/daygrid": "^5.10.0",
     "@fullcalendar/react": "^5.10.0",
@@ -32,9 +32,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
-  "proxy": "http://localhost:5000/",
-
   "eslintConfig": {
     "extends": [
       "react-app",
