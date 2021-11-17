@@ -44,7 +44,9 @@ class Register extends Component {
     console.log(errors);
     return (
       <div className="registerContainer">
-        <h1 align="middle">Register form</h1>
+        <h1 style={{ color: "#A6CEB6" }} align="middle">
+          Sign Up
+        </h1>
         <form align="middle" onSubmit={this.onSubmit}>
           <label>Email: </label>
           <input
@@ -90,9 +92,10 @@ class Register extends Component {
           <br />
           <input type="submit" value="enter"></input>
         </form>
-        <a align="middle" href="/">
-          Login in Now
-        </a>
+        <Link to="/login" className="btn-flat waves-effect">
+          <i className="material-icons left">keyboard_backspace</i>
+          Already have an account? Sign in
+        </Link>
       </div>
     );
   }
