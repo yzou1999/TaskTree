@@ -20,12 +20,12 @@ export default function () {
     };
 
     async function handleEventAdd(data) {
-        console.log('works', data.event);
         await axios.post('/api/calendar/create-event', data.event);
+        console.log('works', data.event);
     }
 
     async function handleDatesSet(data) {
-        const response = await axios.get("/api/calendar/get-events?start="+moment(data.start).toISOString()+"&end="+moment(data.end).toISOString())
+        const response = await axios.get("/api/calendar/get-events?start=" +moment(data.start).toISOString() +"&end="+moment(data.end).toISOString())
         setEvents(response.data);
     }
 
@@ -39,7 +39,7 @@ export default function () {
                         plugins={[dayGridPlugin]}
                         initialView="dayGridMonth"
                         eventAdd={(event) => handleEventAdd(event)}
-                        dateSet ={(date) => handleDatesSet(date)}
+                        datesSet ={(date) => handleDatesSet(date)}
                     />
                 </div>
 
