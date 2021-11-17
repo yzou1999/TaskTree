@@ -24,7 +24,7 @@ function Dashboard({tasks, completeTask, removeTask, updateTask}) {
 
     return tasks.map((task, index) => (
         <div 
-            className={task.isCOmplete ? 'task-row complete' : 'task-row'} 
+            className={task.isComplete ? 'task-row complete' : 'task-row'} 
             key={index}
         >
             <div key={task.id} onClick={() => completeTask(task.id)}>

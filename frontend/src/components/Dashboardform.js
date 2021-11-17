@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 
 function Dashboardform(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value: '');
@@ -22,6 +23,11 @@ function Dashboardform(props) {
         });
 
         setInput('');
+        const newTask = {
+            title: input
+        }
+        console.log(newTask)
+        axios.post("/dashboardlist/create-task", newTask)
     };
 
     return (

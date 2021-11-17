@@ -1,0 +1,9 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {render,fireEvent} from "@testing-library/react"
+import Calendar from './Calendar';
+
+it("renders without crashing", ()=>{
+    const div = document.createElement("div");
+    ReactDOM.render(<Calendar></Calendar>, div)
+})
