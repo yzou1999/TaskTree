@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Link } from 'react-router-dom';
 import { Row, Col, Card, Table } from 'react-bootstrap';
+import Calendar from '../Calendar';
+import DashboardList from '../DashboardList';
+import Navbar from '../Navbar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
 
@@ -16,6 +20,15 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     return (
+      <>
+      <Router>
+      <Navbar />
+      <Switch>
+        <Route path='/' exact component={Dashboard} />
+        <Route path='/dashboardlist' component={DashboardList} />
+        <Route path='/calendar' component={Calendar} />
+      </Switch>
+    </Router>
       <div style={{ height: "100%" }} className="container valign-wrapper">
           <div className="col s12 center-align">
             <h4>
@@ -170,7 +183,6 @@ class Dashboard extends Component {
 
     </Col>
 </Row>
-
 </React.Fragment>
 
 
@@ -180,9 +192,10 @@ class Dashboard extends Component {
 
 
           
-      
+        
       </div>
-
+      </>
+     
       
     );
   }

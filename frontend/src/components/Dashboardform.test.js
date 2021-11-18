@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Dashboardform from './Dashboardform';
-import {render,fireEvent} from "@testing-library/react"
+import {render,fireEvent, getByTestId} from "@testing-library/react"
 
 it("renders without crashing", ()=>{
     const div = document.createElement("div");
@@ -14,18 +14,17 @@ test("renders correct content", () => {
 
     expect(root.querySelector("button").textContent).toBe("Add task");
     expect(root.querySelector("input").textContent).toBe("");
+    expect(root.querySelector("label").textContent).toBe("What needs to be done?");
 
 
 })
 
-/*
-test("allows users to add tasks to their list", () => {
-    const {getByText, getBylabelText} = render(<Dashboardform />);
 
-    const input = getByText("What needs to be done?");
-    const button = getByText("Add task");
-    fireEvent.change(input, {target: {value: "Do Dishes"}});
+
+
+test("Click", () => {
+    const {container} = render(<Dashboardform />);
+
+    const button = getByTestId(container, 'add-task-button');
     fireEvent.click(button);
-
-    getByText("Do Dishes");
-}); */
+});
