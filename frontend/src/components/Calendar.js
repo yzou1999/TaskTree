@@ -36,7 +36,7 @@ export default function () {
     */
     return (
         <section>
-            <button onClick={() => setModalOpen(true)}>Add Event</button>
+            <button data-testid='add-event-button' onClick={() => setModalOpen(true)}>Add Event</button>
                 <div style ={{position: "relative", zIndex: 0}}>
                     <FullCalendar
                         ref={calendarRef}

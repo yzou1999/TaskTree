@@ -14,7 +14,7 @@ export const SidebarData = [
     },
     {
         title: 'Tasks',
-        path: '/tasks',
+        path: '/dashboardlist',
         icon: <BsIcons.BsListTask />,
         cName: 'nav-text'
     },
