@@ -48,15 +48,7 @@ function DashboardList() {
     }
 
     return (
-        <>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path='/dashboard' exact component={Dashboard} />
-          <Route path='/tasks' component={DashboardList} />
-          <Route path='/calendar' component={Calendar} />
-        </Switch>
-      </Router>
+    
         <div className ='task-app'>
             <h1>Tasks to be completed!</h1>
             <Dashboardform onSubmit={addTask} />
@@ -65,7 +57,6 @@ function DashboardList() {
             <a href = "\calendar">Calendar</a>
             
         </div>
-        </>
         
     )
 }
