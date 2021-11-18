@@ -25,8 +25,11 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 const calendarRouter = require("./routes/CalendarRoute");
+const taskRouter = require("./routes/TaskRoute");
 app.use("/", loginAndRegisterRouter);
 app.use("/api/calendar", calendarRouter);
+app.use("/dashboardlist", taskRouter);
+
 
 app.listen(port, () => {
   console.log(`server is running on ${port}`);

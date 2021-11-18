@@ -3,6 +3,9 @@ import Dashboard from './Dashboard';
 import Dashboardform from './Dashboardform'
 import axios from 'axios';
 import moment from 'moment';
+import Calendar from './Calendar';
+import Navbar from './Navbar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function DashboardList() {
     const [tasks, setTasks] = useState([])
@@ -45,6 +48,15 @@ function DashboardList() {
     }
 
     return (
+        <>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path='/dashboard' exact component={Dashboard} />
+          <Route path='/tasks' component={DashboardList} />
+          <Route path='/calendar' component={Calendar} />
+        </Switch>
+      </Router>
         <div className ='task-app'>
             <h1>Tasks to be completed!</h1>
             <Dashboardform onSubmit={addTask} />
@@ -53,6 +65,7 @@ function DashboardList() {
             <a href = "\calendar">Calendar</a>
             
         </div>
+        </>
         
     )
 }
