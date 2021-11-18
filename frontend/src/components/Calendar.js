@@ -30,7 +30,7 @@ export default function () {
     }
 
     return (
-        <section>
+        /* <section>
             <button onClick={() => setModalOpen(true)}>Add Event</button>
                 <div style ={{position: "relative", zIndex: 0}}>
                     <FullCalendar
@@ -46,7 +46,7 @@ export default function () {
             <AddEventModal 
             isOpen={modalOpen} 
             onClose={() => setModalOpen(false)} 
-            onEventAdded={event => onEventAdded(event)}
+            onEventAdded={event => onEventAdded(event)} */
             />
 
         </section>

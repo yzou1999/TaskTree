@@ -8,17 +8,17 @@ export default function ({isOpen, onClose, onEventAdded}) {
     const[end, setEnd] = useState(new Date());
 
     const onSubmit = (event) => {
-        event.preventDefault();
+       /* event.preventDefault();
 
         onEventAdded({
             title,
             start,
             end
         })
-        onClose();
+        onClose(); */
     }
 
-    return (
+   /* return (
         <Modal isOpen={isOpen} onRequestClose={onClose}>
             <form onSubmit={onSubmit}>
                 <input placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} />
@@ -30,7 +30,7 @@ export default function ({isOpen, onClose, onEventAdded}) {
 
                 <div>
                     <label>End Date</label>
-                    <Datetime value={end} onChange={date => setEnd(date)} />
+                    <Datetime value={end} onChange={date => setEnd(date)} /> 
                 </div>
 
                 <button>Add event</button>
@@ -39,5 +39,5 @@ export default function ({isOpen, onClose, onEventAdded}) {
                  
             </form>
         </Modal>
-    )
+    )*/
 }

@@ -23,7 +23,7 @@ function Dashboard({tasks, completeTask, removeTask, updateTask}) {
 
 
     return tasks.map((task, index) => (
-        <div 
+      /*  <div 
             className={task.isComplete ? 'task-row complete' : 'task-row'} 
             key={index}
         >
@@ -36,7 +36,7 @@ function Dashboard({tasks, completeTask, removeTask, updateTask}) {
                 className='delete-icon'
                 />
                 <TiEdit 
-                onClick={() => setEdit({id: task.id, value: task.text} )}
+                onClick={() => setEdit({id: task.id, value: task.text} )} */
                 className='edit-icon'
                 />
             </div>

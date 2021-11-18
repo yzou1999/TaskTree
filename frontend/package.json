@@ -51,10 +51,14 @@
     ]
   },
   "jest":{
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}"
-    ]
+    "collectCoverageFrom": 
+      ["**/components/**",
+        "!**/dashboard/**",
+        "!**/layout/**",
+        "!**/private-route/**"
+      ]
 
+    
   },
   "devDependencies": {
     "classnames": "^2.3.1",

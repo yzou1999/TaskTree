@@ -7,7 +7,7 @@ import moment from 'moment';
 function DashboardList() {
     const [tasks, setTasks] = useState([])
 
-    const addTask = task => {
+   /* const addTask = task => {
         if(!task.text || /^\s*$/.test(task.text)) {
             return
         }
@@ -15,7 +15,7 @@ function DashboardList() {
         const newTasks = [task, ...tasks]
 
         setTasks(newTasks)
-    };
+    }; */
 
     
     const updateTask = (taskId, newValue) => {
@@ -23,7 +23,7 @@ function DashboardList() {
             return
         }
 
-        setTasks(prev => prev.map(item => (item.id === taskId ? newValue : item)));
+    /*    setTasks(prev => prev.map(item => (item.id === taskId ? newValue : item)));
 
     };
     
@@ -42,7 +42,7 @@ function DashboardList() {
             return task
         });
         setTasks(updatedTasks);
-    }
+    } */
 
     return (
         <div className ='task-app'>

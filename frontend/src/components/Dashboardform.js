@@ -15,7 +15,7 @@ function Dashboardform(props) {
     };
 
     const handleSubmit = e => {
-        e.preventDefault();
+      /*  e.preventDefault();
 
         props.onSubmit({
             id: Math.floor(Math.random() * 1000),
@@ -27,7 +27,7 @@ function Dashboardform(props) {
             title: input
         }
         console.log(newTask)
-        axios.post("/dashboardlist/create-task", newTask)
+        axios.post("/dashboardlist/create-task", newTask) */
     };
 
     return (
