@@ -53,7 +53,7 @@ function DashboardList() {
         <Navbar />
         <Switch>
           <Route path='/dashboard' exact component={Dashboard} />
-          <Route path='/task' component={Calendar} />
+          <Route path='/tasks' component={DashboardList} />
           <Route path='/calendar' component={Calendar} />
         </Switch>
       </Router>
