@@ -8,6 +8,7 @@ import store from "./store";
 import Register from "./components/oldRegister";
 import Login from "./components/oldLogin";
 import Forgot from "./components/forgotPage";
+import ResetPassword from "./components/ResetPassword";
 import Dashboardform from "./components/Dashboardform";
 import DashboardList from "./components/DashboardList";
 import Modal from "react-modal";
@@ -52,6 +53,7 @@ function App() {
           <Route path="/" exact component={Register} />
           <Route path="/login" exact component={Login} />
           <Route path="/forgot" exact component={Forgot} />
+          <Route path="/reset/:resetToken" component={ResetPassword} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute
