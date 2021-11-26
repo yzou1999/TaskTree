@@ -53,12 +53,19 @@ function App() {
           <Route path="/" exact component={Register} />
           <Route path="/login" exact component={Login} />
           <Route path="/forgot" exact component={Forgot} />
-          <Route path="/dashboard" exact component={Dashboard} />
-          <Route path="/dashboardform" exact component={Dashboardform} />
-          <Route path="/dashboardlist" exact component={DashboardList} />
-          <Route path="/calendar" exact component={Calendar} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute
+              path="/dashboardform"
+              exact
+              component={Dashboardform}
+            />
+            <PrivateRoute
+              path="/dashboardlist"
+              exact
+              component={DashboardList}
+            />
+            <PrivateRoute path="/calendar" exact component={Calendar} />
           </Switch>
         </div>
       </Router>

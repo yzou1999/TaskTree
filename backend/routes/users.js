@@ -4,9 +4,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const registerValidation = require("../validation/register.js");
 const loginValidation = require("../validation/login.js");
+const forgotValidation = require("../validation/forgot.js");
+const nodemailer = require("nodemailer");
 const keys = require("../config/keys.js");
 const passport = require("passport");
 const isEmpty = require("is-empty");
+require("dotenv").config();
 
 router.route("/").get((req, res) => {
   User.find().then((users) => res.json(users));
@@ -117,4 +120,41 @@ router.post("/login", (req, res) => {
   });
 });
 
+router.post("/forgot", (req, res) => {
+  const { errors, isValid } = forgotValidation(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  User.findOne({ email: req.body.email }).then((user) => {
+    //the email exist in database
+    if (user) {
+      const userEmail = user.email;
+      const GMAIL_INFO = {
+        service: "Gmail",
+        auth: {
+          user: process.env.serverEmail,
+          pass: process.env.serverPWD,
+        },
+      };
+      const serverEmail = nodemailer.createTransport(GMAIL_INFO);
+      const clientEmail = {
+        from: GMAIL_INFO.auth.user,
+        to: userEmail,
+        subject: "reset password",
+        html: '<p> Click on this <a href="http://localhost:3000/reset">link</a> to reset your password.</p> ',
+      };
+      if (serverEmail.sendMail(clientEmail)) {
+        console.log("sent");
+        console.log(clientEmail);
+      } else {
+        console.log("error");
+      }
+    } else {
+      return res.status(400).json({ email: "Email not found" });
+    }
+    //email doesn't exist
+  });
+});
 module.exports = router;
