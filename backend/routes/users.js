@@ -130,31 +130,34 @@ router.post("/forgot", (req, res) => {
   User.findOne({ email: req.body.email }).then((user) => {
     //the email exist in database
     if (user) {
-      const userEmail = user.email;
-      const GMAIL_INFO = {
-        service: "Gmail",
-        auth: {
-          user: process.env.serverEmail,
-          pass: process.env.serverPWD,
-        },
-      };
-      const serverEmail = nodemailer.createTransport(GMAIL_INFO);
-      const clientEmail = {
-        from: GMAIL_INFO.auth.user,
-        to: userEmail,
-        subject: "reset password",
-        html: '<p> Click on this <a href="http://localhost:3000/reset">link</a> to reset your password.</p> ',
-      };
-      if (serverEmail.sendMail(clientEmail)) {
-        console.log("sent");
-        console.log(clientEmail);
-      } else {
-        console.log("error");
-      }
+      sendEmail(user.email, user);
+      return res.sendStatus(200);
     } else {
       return res.status(400).json({ email: "Email not found" });
     }
     //email doesn't exist
   });
 });
+
+async function sendEmail(email, user) {
+  const userEmail = user.email;
+  const GMAIL_INFO = {
+    service: "Gmail",
+    auth: {
+      user: process.env.serverEmail,
+      pass: process.env.serverPWD,
+    },
+  };
+  const resetToken = user.getResetPasswordToken();
+  const url = `http://localhost:3000/reset/${resetToken}`;
+  const serverEmail = nodemailer.createTransport(GMAIL_INFO);
+  const clientEmail = {
+    from: GMAIL_INFO.auth.user,
+    to: userEmail,
+    subject: "reset password",
+    html: `<p> Click on this <a href=${url}>link</a> to reset your password.</p>`,
+  };
+  let sent = await serverEmail.sendMail(clientEmail);
+}
+
 module.exports = router;

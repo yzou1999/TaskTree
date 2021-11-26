@@ -18,7 +18,9 @@ export const registerUser = (userData, history) => (dispatch) => {
 export const forgotPWD = (userData, history) => (dispatch) => {
   axios
     .post("http://localhost:5000/forgot", userData)
-    .then((res) => history.push("/login"))
+    .then((res) => {
+      history.push("/login");
+    })
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,

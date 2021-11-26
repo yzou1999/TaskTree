@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { forgotPWD } from "../actions/authActions";
@@ -12,17 +12,18 @@ class Forgot extends Component {
     this.state = {
       email: "",
       errors: {},
+      sent: false,
     };
   }
 
-  onChange = (e) => {
-    this.setState({ [e.target.id]: e.target.value });
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/"); // push user to dashboard when they login
+  componentDidMount() {
+    // If logged in and user navigates to Register page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
+  }
+  //shows errors
+  componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors,
@@ -30,20 +31,27 @@ class Forgot extends Component {
     }
   }
 
+  onChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
   onSubmit = (e) => {
     e.preventDefault();
     const userData = {
       email: this.state.email,
     };
     this.props.forgotPWD(userData, this.props.history);
+    if (this.state.sent) {
+      this.props.history.push("/login");
+    }
   };
 
   render() {
     const { errors } = this.state;
     return (
-      <div className="container">
+      <div className="forgotContainer">
         <h1 style={{ color: "#A6CEB6" }} align="middle">
-          Forgot form
+          Forgot
         </h1>
         <form align="middle" onSubmit={this.onSubmit}>
           <label>Email: </label>
@@ -58,8 +66,8 @@ class Forgot extends Component {
             })}
           ></input>
           <span className="red-text">{errors.email}</span>
-          <br></br>
-          <br></br>
+          <br />
+          <br />
           <input type="submit" value="enter"></input>
         </form>
       </div>
@@ -76,4 +84,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
-export default connect(mapStateToProps, { forgotPWD })(Forgot);
+export default connect(mapStateToProps, { forgotPWD })(withRouter(Forgot));

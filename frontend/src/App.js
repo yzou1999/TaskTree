@@ -8,7 +8,6 @@ import store from "./store";
 import Register from "./components/oldRegister";
 import Login from "./components/oldLogin";
 import Forgot from "./components/forgotPage";
-import dashboard from "./components/Dashboard.js";
 import Dashboardform from "./components/Dashboardform";
 import DashboardList from "./components/DashboardList";
 import Modal from "react-modal";
