@@ -8,7 +8,7 @@ import store from "./store";
 import Register from "./components/oldRegister";
 import Login from "./components/oldLogin";
 import Forgot from "./components/forgotPage";
-import dashboard from "./components/Dashboard.js";
+import ResetPassword from "./components/ResetPassword";
 import Dashboardform from "./components/Dashboardform";
 import DashboardList from "./components/DashboardList";
 import Modal from "react-modal";
@@ -53,12 +53,20 @@ function App() {
           <Route path="/" exact component={Register} />
           <Route path="/login" exact component={Login} />
           <Route path="/forgot" exact component={Forgot} />
-          <Route path="/dashboard" exact component={Dashboard} />
-          <Route path="/dashboardform" exact component={Dashboardform} />
-          <Route path="/dashboardlist" exact component={DashboardList} />
-          <Route path="/calendar" exact component={Calendar} />
+          <Route path="/reset/:resetToken" component={ResetPassword} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute
+              path="/dashboardform"
+              exact
+              component={Dashboardform}
+            />
+            <PrivateRoute
+              path="/dashboardlist"
+              exact
+              component={DashboardList}
+            />
+            <PrivateRoute path="/calendar" exact component={Calendar} />
           </Switch>
         </div>
       </Router>

@@ -14,6 +14,34 @@ export const registerUser = (userData, history) => (dispatch) => {
       })
     );
 };
+// user forgot
+export const forgotPWD = (userData, history) => (dispatch) => {
+  axios
+    .post("http://localhost:5000/forgot", userData)
+    .then((res) => {
+      history.push("/login");
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+export const resetPWD = (userData, history, token) => (dispatch) => {
+  axios
+    .put(`http://localhost:5000/reset/${token}`, userData)
+    .then((res) => {
+      history.push("/login");
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
 // Login - get user token
 export const loginUser = (userData) => (dispatch) => {
   axios
