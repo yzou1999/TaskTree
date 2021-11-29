@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import AddEventModal from './AddEventModal';
+import Dashboard from "./dashboard/Dashboard";
 import axios from "axios";
 import moment from "moment";
 
@@ -20,13 +21,20 @@ export default function () {
     };
 
     async function handleEventAdd(data) {
-        await axios.post('/api/calendar/create-event', data.event);
+        await axios.post('/api/calendar/create-event?', {title: data.event.title, start: data.event.start, end:data.event.end, username:localStorage.getItem("username")});
         console.log('works', data.event);
     }
 
+
     async function handleDatesSet(data) {
         const response = await axios.get("/api/calendar/get-events?start=" +moment(data.start).toISOString() +"&end="+moment(data.end).toISOString())
-        setEvents(response.data);
+        let array = []
+        for (let i = 0; i < response.data.length; i++) {
+            if(response.data[i].username == localStorage.getItem("username")){
+                array.push(response.data[i]);
+            } 
+        };
+        setEvents(array);
     }
 
     return (
@@ -40,6 +48,7 @@ export default function () {
                         initialView="dayGridMonth"
                         eventAdd={(event) => handleEventAdd(event)}
                         datesSet ={(date) => handleDatesSet(date)}
+  
                     />
                 </div>
 
