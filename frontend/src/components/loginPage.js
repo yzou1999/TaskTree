@@ -146,7 +146,7 @@ function Login(props) {
                   },
                 }}
                 value={loginValue}
-                onChange={(e) => setLoginValue(e.target.value)}
+                onChange={(e) => setLoginValue(e.target.value), localStorage.setItem("username", e.target.value)}
                 margin="normal"
                 placeholder="Email Address"
                 type="email"
