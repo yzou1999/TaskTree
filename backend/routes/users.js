@@ -4,9 +4,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const registerValidation = require("../validation/register.js");
 const loginValidation = require("../validation/login.js");
+const forgotValidation = require("../validation/forgot.js");
+const resetValidation = require("../validation/reset.js");
+const nodemailer = require("nodemailer");
 const keys = require("../config/keys.js");
 const passport = require("passport");
 const isEmpty = require("is-empty");
+const crypto = require("crypto");
+require("dotenv").config();
 
 router.route("/").get((req, res) => {
   User.find().then((users) => res.json(users));
@@ -114,6 +119,88 @@ router.post("/login", (req, res) => {
           .json({ passwordIncorrect: "Password incorrect" });
       }
     });
+  });
+});
+
+async function sendEmail(email, user) {
+  const userEmail = user.email;
+  const GMAIL_INFO = {
+    service: "Gmail",
+    auth: {
+      user: process.env.serverEmail,
+      pass: process.env.serverPWD,
+    },
+  };
+  const resetToken = user.getResetPasswordToken();
+  await user.save();
+  const url = `http://localhost:3000/reset/${resetToken}`;
+  const serverEmail = nodemailer.createTransport(GMAIL_INFO);
+  const clientEmail = {
+    from: GMAIL_INFO.auth.user,
+    to: userEmail,
+    subject: "reset password",
+    html: `<p> Click on this <a href=${url}>link</a> to reset your password.</p>`,
+  };
+  let sent = await serverEmail.sendMail(clientEmail);
+}
+
+router.post("/forgot", (req, res) => {
+  const { errors, isValid } = forgotValidation(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  User.findOne({ email: req.body.email }).then((user) => {
+    //the email exist in database
+    if (user) {
+      sendEmail(user.email, user);
+      return res.sendStatus(200);
+    } else {
+      return res.status(400).json({ email: "Email not found" });
+    }
+    //email doesn't exist
+  });
+});
+
+router.put("/reset/:resetToken", (req, res) => {
+  const { errors, isValid } = resetValidation(req.body);
+  console.log(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.resetToken)
+    .digest("hex");
+
+  console.log(resetPasswordToken);
+  User.findOne({
+    resetPasswordToken,
+  }).then((user) => {
+    if (user) {
+      user.password = req.body.password;
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined; //saves the user in the database with hashed passwords for encryption
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
+          if (err) {
+            throw err;
+          }
+          user.password = hash;
+          user
+            .save()
+            .then((user) => res.json(user))
+            .catch((err) => console.log(err));
+        });
+      });
+      console.log("password change success");
+      return res.status(200);
+    } else {
+      console.log("invalid token");
+      return res.status(400).json({ password: "Invalid token" });
+    }
   });
 });
 

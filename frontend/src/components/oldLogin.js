@@ -40,13 +40,12 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password,
     };
+    localStorage.setItem("username", this.state.username);
     this.props.loginUser(userData);
     console.log(userData);
   };
   render() {
     const { errors } = this.state;
-    console.log(errors);
-    console.log(this.state.errors);
     return (
       <div className="container">
         <h1 style={{ color: "#A6CEB6" }} align="middle">
@@ -92,6 +91,10 @@ class Login extends Component {
         <Link to="" className="btn-flat waves-effect">
           <i className="material-icons left">keyboard_backspace</i>
           Don't have an account? Sign Up
+        </Link>
+        <Link to="/forgot" className="btn-flat waves-effect">
+          <i className="material-icons left">keyboard_backspace</i>
+          Forgot your password?
         </Link>
       </div>
     );

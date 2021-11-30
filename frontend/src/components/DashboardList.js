@@ -3,6 +3,9 @@ import Dashboard from './Dashboard';
 import Dashboardform from './Dashboardform'
 import axios from 'axios';
 import moment from 'moment';
+import Calendar from './Calendar';
+import Navbar from './Navbar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function DashboardList() {
     const [tasks, setTasks] = useState([])
@@ -45,6 +48,7 @@ function DashboardList() {
     }
 
     return (
+    
         <div className ='task-app'>
             <h1>Tasks to be completed!</h1>
             <Dashboardform onSubmit={addTask} />

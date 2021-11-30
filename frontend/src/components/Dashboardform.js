@@ -60,7 +60,7 @@ function Dashboardform(props) {
                 onChange={handleChange}
                 ref={inputRef}
             />
-            <button onClick={handleSubmit} className="task-button">Add task</button>
+            <button data-testid='add-task-button' onClick={handleSubmit} className="task-button">Add task</button>
             </>
             )}
             
