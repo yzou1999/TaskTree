@@ -18,6 +18,36 @@ router.route("/users").get((req, res) => {
   //.catch((err) => res.status(400).json("error"));
 });
 
+router.route("/addBadge").post((req, res) => {
+  User.findOneAndUpdate({ username: req.body.username}, {$set: {numberOfTrees: req.body.numberOfTrees + 1}
+  }).then(result => {
+    res.status(200).json({
+      updated_badge:result
+    })
+  })
+  .catch(err =>{
+    console.log(err);
+    res.status(500).json({
+      error:err
+    })
+  })
+})
+
+router.route("/addTree").post((req, res) => {
+  User.findOneAndUpdate({ username: req.body.username}, {$set: {numberOfBadges: req.body.numberOfBadges + 1}
+  }).then(result => {
+    res.status(200).json({
+      updated_Tree:result
+    })
+  })
+  .catch(err =>{
+    console.log(err);
+    res.status(500).json({
+      error:err
+    })
+  })
+})
+
 router.route("/register").post((req, res) => {
   //return value of the registerValidation function on user register request
   const { errors, isValid } = registerValidation(req.body);
@@ -54,6 +84,8 @@ router.route("/register").post((req, res) => {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
+            numberOfTrees: 0,
+            numberOfBadges: 0,
           });
 
           //saves the user in the database with hashed passwords for encryption

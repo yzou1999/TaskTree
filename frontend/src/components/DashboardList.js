@@ -45,7 +45,29 @@ function DashboardList() {
             return task
         });
         setTasks(updatedTasks);
+        axios.get('/users')
+        .then((response) => {
+            const data = response.data;
+            var number = {};
+            for (let i = 0; i < response.data.length; i++) {
+                if(response.data[i].username == localStorage.getItem("username")){
+                    number = i;
+                }
+            }
+            console.log(data[number].numberOfTrees)
+            if(data[number].numberOfTrees % 10 == 9) {
+                axios.post('/addTree', data[number])
+                console.log('accessed')
+            }
+            axios.post('/addBadge', data[number]);
+            console.log(data) 
+            })
+            .catch(function (error) {
+            console.log("Error while fetching market updates");
+        }); 
+        alert("You have earned a badge!")
     }
+
 
     return (
     

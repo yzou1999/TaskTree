@@ -24,6 +24,7 @@ const userSchema = new Schema(
     resetPasswordToken: String,
     resetPasswordExpire: Date,
     numberOfTrees: Number,
+    numberOfBadges: Number,
   },
   { timestamps: true }
 );
