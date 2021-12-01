@@ -30,6 +30,7 @@ export default function () {
 
     async function handleDatesSet(data) {
         const response = await axios.get("/api/calendar/get-events?start=" +moment(data.start).toISOString() +"&end="+moment(data.end).toISOString())
+        console.log(response.data);
         let array = []
         for (let i = 0; i < response.data.length; i++) {
             if(response.data[i].username == localStorage.getItem("username")){
