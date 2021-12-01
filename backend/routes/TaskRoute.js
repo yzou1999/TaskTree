@@ -12,9 +12,8 @@ router.route("/create-task").post((req, res) => {
 })
 
 router.get("/get-tasks", async(req,res) => {
-    const events = await Task.find({
-        start: {$gte: moment(req.query.start).toDate() }, 
-        end: { $lte: moment(req.query.end).toDate() },
+    const tasks = await Task.find({
+        title: {$gte: moment(req.query.start).toString() } 
     });
 
     res.send(tasks);
