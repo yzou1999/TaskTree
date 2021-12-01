@@ -20,6 +20,7 @@ class Register extends Component {
       this.props.history.push("/dashboard");
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -41,7 +42,6 @@ class Register extends Component {
   };
   render() {
     const { errors } = this.state;
-    console.log(errors);
     return (
       <div className="registerContainer">
         <h1 style={{ color: "#A6CEB6" }} align="middle">

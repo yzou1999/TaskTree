@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin, {DateClickArg} from '@fullcalendar/interaction'
 import AddEventModal from './AddEventModal';
 import Dashboard from "./dashboard/Dashboard";
 import axios from "axios";
@@ -39,8 +38,11 @@ export default function () {
         };
         setEvents(array);
     }
+    /*
+    async function handleEventDelete(data){
 
-
+    }
+    */
     return (
         <section>
             <button data-testid='add-event-button' onClick={() => setModalOpen(true)}>Add Event</button>
@@ -48,13 +50,16 @@ export default function () {
                     <FullCalendar
                         ref={calendarRef}
                         events={events}
-                        plugins={[dayGridPlugin, interactionPlugin ]}
+                        plugins={[dayGridPlugin]}
+                        /*headerToolbar={{
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                          }}*/
                         initialView="dayGridMonth"
                         selectable= 'true'
                         eventAdd={(event) => handleEventAdd(event)}
                         datesSet ={(date) => handleDatesSet(date)}
-                        
-  
                     />
                 </div>
 
@@ -66,4 +71,36 @@ export default function () {
 
         </section>
     )
+/*
+    renderSidebar() {
+        return (
+          <div className='demo-app-sidebar'>
+            <div className='demo-app-sidebar-section'>
+              <h2>Instructions</h2>
+              <ul>
+                <li>Select dates and you will be prompted to create a new event</li>
+                <li>Drag, drop, and resize events</li>
+                <li>Click an event to delete it</li>
+              </ul>
+            </div>
+            <div className='demo-app-sidebar-section'>
+              <label>
+                <input
+                  type='checkbox'
+                  checked={this.state.weekendsVisible}
+                  onChange={this.handleWeekendsToggle}
+                ></input>
+                toggle weekends
+              </label>
+            </div>
+            <div className='demo-app-sidebar-section'>
+              <h2>All Events ({this.state.currentEvents.length})</h2>
+              <ul>
+                {this.state.currentEvents.map(renderSidebarEvent)}
+              </ul>
+            </div>
+          </div>
+        )
+      }
+      */
 }

@@ -2,25 +2,18 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { forgotPWD } from "../actions/authActions";
+import { resetPWD } from "../actions/authActions";
 import classnames from "classnames";
 import axios from "axios";
 
-class Forgot extends Component {
+class ResetPassword extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
+      password: "",
+      password2: "",
       errors: {},
-      sent: false,
     };
-  }
-
-  componentDidMount() {
-    // If logged in and user navigates to Register page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
   }
   //shows errors
   componentWillReceiveProps(nextProps) {
@@ -38,31 +31,50 @@ class Forgot extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const userData = {
-      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2,
     };
-    this.props.forgotPWD(userData, this.props.history);
+    this.props.resetPWD(
+      userData,
+      this.props.history,
+      this.props.match.params.resetToken
+    );
   };
 
   render() {
     const { errors } = this.state;
     return (
-      <div className="forgotContainer">
+      <div className="resetContainer">
         <h1 style={{ color: "#A6CEB6" }} align="middle">
-          Forgot
+          Reset
         </h1>
         <form align="middle" onSubmit={this.onSubmit}>
-          <label>Email: </label>
+          <label>new password: </label>
           <input
+            id="password"
+            type="password"
             onChange={this.onChange}
-            value={this.state.email}
-            error={errors.email}
-            id="email"
-            type="email"
+            value={this.state.password}
+            error={errors.password}
             className={classnames("", {
-              invalid: errors.email,
+              invalid: errors.password,
             })}
           ></input>
-          <span className="red-text">{errors.email}</span>
+          <span className="red-text">{errors.password}</span>
+          <br />
+          <br />
+          <label>confirm password: </label>
+          <input
+            onChange={this.onChange}
+            value={this.state.password2}
+            error={errors.password2}
+            id="password2"
+            type="password"
+            className={classnames("", {
+              invalid: errors.password2,
+            })}
+          ></input>
+          <span className="red-text">{errors.password2}</span>
           <br />
           <br />
           <input type="submit" value="enter"></input>
@@ -72,8 +84,8 @@ class Forgot extends Component {
   }
 }
 
-Forgot.propTypes = {
-  forgotPWD: PropTypes.func.isRequired,
+ResetPassword.propTypes = {
+  resetPWD: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
@@ -81,4 +93,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
-export default connect(mapStateToProps, { forgotPWD })(withRouter(Forgot));
+export default connect(mapStateToProps, { resetPWD })(
+  withRouter(ResetPassword)
+);
