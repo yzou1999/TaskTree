@@ -13,7 +13,7 @@ const isEmpty = require("is-empty");
 const crypto = require("crypto");
 require("dotenv").config();
 
-router.route("/").get((req, res) => {
+router.route("/users").get((req, res) => {
   User.find().then((users) => res.json(users));
   //.catch((err) => res.status(400).json("error"));
 });
