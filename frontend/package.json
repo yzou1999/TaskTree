@@ -5,6 +5,7 @@
   "proxy": "http://localhost:5000/",
   "dependencies": {
     "@fullcalendar/daygrid": "^5.10.0",
+    "@fullcalendar/interaction": "^5.10.1",
     "@fullcalendar/react": "^5.10.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",

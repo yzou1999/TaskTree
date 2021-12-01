@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin, {DateClickArg} from '@fullcalendar/interaction'
 import AddEventModal from './AddEventModal';
 import Dashboard from "./dashboard/Dashboard";
 import axios from "axios";
 import moment from "moment";
+
 
 export default function () {
     const [modalOpen, setModalOpen] = useState(false);
@@ -19,6 +21,7 @@ export default function () {
             title: event.title
         });
     };
+
 
     async function handleEventAdd(data) {
         await axios.post('/api/calendar/create-event?', {title: data.event.title, start: data.event.start, end:data.event.end, username:localStorage.getItem("username")});
@@ -37,6 +40,7 @@ export default function () {
         setEvents(array);
     }
 
+
     return (
         <section>
             <button data-testid='add-event-button' onClick={() => setModalOpen(true)}>Add Event</button>
@@ -44,10 +48,12 @@ export default function () {
                     <FullCalendar
                         ref={calendarRef}
                         events={events}
-                        plugins={[dayGridPlugin]}
+                        plugins={[dayGridPlugin, interactionPlugin ]}
                         initialView="dayGridMonth"
+                        selectable= 'true'
                         eventAdd={(event) => handleEventAdd(event)}
                         datesSet ={(date) => handleDatesSet(date)}
+                        
   
                     />
                 </div>
