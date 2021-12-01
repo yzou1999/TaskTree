@@ -44,9 +44,11 @@ class Register extends Component {
     const { errors } = this.state;
     return (
       <div className="registerContainer">
+
         <h1 style={{ color: "#A6CEB6" }} align="middle">
-          Sign Up
+          Sign Up Below
         </h1>
+        
         <form align="middle" onSubmit={this.onSubmit}>
           <label>Email: </label>
           <input
