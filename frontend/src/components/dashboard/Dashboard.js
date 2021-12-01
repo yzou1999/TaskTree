@@ -26,10 +26,12 @@ class Dashboard extends Component {
       .then((response) => {
         const { user } = this.props.auth;
         const data = response.data;
+        console.log(data);
+        console.log(user.id);
         for (var i = 0; i < data.length; i++) {
           var obj = data[i];
           for (var key in obj) {
-            if (obj[key].localeCompare(user.id) == 0) {
+            if (obj[key] == user.id) {
               console.log(obj);
               this.setState({ currentUser: obj });
               return;
@@ -49,7 +51,6 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     console.log("State: ", this.state);
-    console.log("numbertree", this.state.currentUser.numberOfTrees);
     return (
       <>
         <Router>
@@ -127,7 +128,7 @@ class Dashboard extends Component {
                         <div className="col-9">
                           <h3 className="f-w-300 d-flex align-items-center m-b-0">
                             <i className="feather icon-arrow-up text-c-green f-30 m-r-5" />{" "}
-                            0
+                            {this.state.currentUser.numberOfBadges}
                           </h3>
                         </div>
                       </div>

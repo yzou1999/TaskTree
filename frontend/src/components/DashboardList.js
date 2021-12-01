@@ -55,6 +55,10 @@ function DashboardList() {
                 }
             }
             console.log(data[number].numberOfTrees)
+            if(data[number].numberOfTrees % 10 == 9) {
+                axios.post('/addTree', data[number])
+                console.log('accessed')
+            }
             axios.post('/addBadge', data[number]);
             console.log(data) 
             })
