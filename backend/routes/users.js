@@ -33,6 +33,21 @@ router.route("/addBadge").post((req, res) => {
   })
 })
 
+router.route("/addTree").post((req, res) => {
+  User.findOneAndUpdate({ username: req.body.username}, {$set: {numberOfBadges: req.body.numberOfBadges + 1}
+  }).then(result => {
+    res.status(200).json({
+      updated_Tree:result
+    })
+  })
+  .catch(err =>{
+    console.log(err);
+    res.status(500).json({
+      error:err
+    })
+  })
+})
+
 router.route("/register").post((req, res) => {
   //return value of the registerValidation function on user register request
   const { errors, isValid } = registerValidation(req.body);
@@ -70,6 +85,7 @@ router.route("/register").post((req, res) => {
             email: req.body.email,
             password: req.body.password,
             numberOfTrees: 0,
+            numberOfBadges: 0,
           });
 
           //saves the user in the database with hashed passwords for encryption
