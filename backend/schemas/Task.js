@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const TaskSchema = mongoose.Schema({
-    title: String
+    id: Number,
+    text: String,
+    username: String,
+    isComplete: Boolean
 })
 
 const Task = mongoose.model('Task', TaskSchema);

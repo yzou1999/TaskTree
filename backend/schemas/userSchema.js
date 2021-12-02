@@ -25,6 +25,7 @@ const userSchema = new Schema(
     resetPasswordExpire: Date,
     numberOfTrees: Number,
     numberOfBadges: Number,
+    tasksCompleted: Number
   },
   { timestamps: true }
 );

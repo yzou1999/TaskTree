@@ -48,6 +48,21 @@ router.route("/addTree").post((req, res) => {
   })
 })
 
+router.route("/addCompletions").post((req, res) => {
+  User.findOneAndUpdate({ username: req.body.username}, {$set: {tasksCompleted: req.body.tasksCompleted + 1}
+  }).then(result => {
+    res.status(200).json({
+      updated_Tree:result
+    })
+  })
+  .catch(err =>{
+    console.log(err);
+    res.status(500).json({
+      error:err
+    })
+  })
+})
+
 router.route("/register").post((req, res) => {
   //return value of the registerValidation function on user register request
   const { errors, isValid } = registerValidation(req.body);
@@ -86,6 +101,7 @@ router.route("/register").post((req, res) => {
             password: req.body.password,
             numberOfTrees: 0,
             numberOfBadges: 0,
+            tasksCompleted: 0
           });
 
           //saves the user in the database with hashed passwords for encryption
