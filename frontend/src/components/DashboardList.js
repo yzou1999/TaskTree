@@ -10,6 +10,24 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function DashboardList() {
     const [tasks, setTasks] = useState([])
 
+    useEffect(() => {
+        axios
+      .get("/dashboardlist/get-tasks")
+      .then((response) => {
+        const data = response.data;
+        let array = []
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].username == localStorage.getItem("username")){
+                array.push(response.data[i]);
+            } 
+        };
+        setTasks(array);
+      })
+      .catch(() => {
+        console.log("currentUser");
+      });
+    }, []);
+
     const addTask = task => {
         if(!task.text || /^\s*$/.test(task.text)) {
             return
@@ -27,11 +45,19 @@ function DashboardList() {
         }
 
         setTasks(prev => prev.map(item => (item.id === taskId ? newValue : item)));
+        var updatedTasks = {
+            id: taskId,
+            text: newValue.text
+        };
+        axios.post('/dashboardlist/changeText', updatedTasks)
 
     };
     
     const removeTask = id => {
         const removeArr = [...tasks].filter(task => task.id !== id)
+        const removedTask = [...tasks].filter(task => task.id == id)
+        console.log(removedTask);
+        axios.post('/dashboardlist/deleteTask', removedTask);
 
         setTasks(removeArr)
     }
@@ -40,7 +66,8 @@ function DashboardList() {
     const completeTask = id => {
         let updatedTasks = tasks.map(task => {
             if (task.id === id) {
-                task.isComplete = !task.isComplete
+                task.isComplete = !task.isComplete;
+                axios.post('/dashboardlist/changeCompletion', task);
             }
             return task
         });
@@ -60,12 +87,30 @@ function DashboardList() {
                 console.log('accessed')
             }
             axios.post('/addBadge', data[number]);
-            console.log(data) 
+            axios.post('/addCompletions', data[number]);
+            if(data[number].numberOfTrees % 10 == 9) {
+                alert("You have earned a badge!")
+                }
+            else {
+                alert("You have planted a tree!")
+                }
             })
             .catch(function (error) {
             console.log("Error while fetching market updates");
         }); 
-        alert("You have earned a badge!")
+    }
+    const handleSubmit = e => {
+        e.preventDefault();
+        axios
+      .get("/dashboardlist/get-tasks")
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        setTasks(data);
+      })
+      .catch(() => {
+        console.log("currentUser");
+      });
     }
 
 
@@ -76,8 +121,6 @@ function DashboardList() {
             <Dashboardform onSubmit={addTask} />
             <Dashboard 
             tasks={tasks} completeTask={completeTask} removeTask={removeTask} updateTask ={updateTask}/>
-            <a href = "\calendar">Calendar</a>
-            
         </div>
         
     )

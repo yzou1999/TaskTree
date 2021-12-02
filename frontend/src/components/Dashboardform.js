@@ -16,18 +16,43 @@ function Dashboardform(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
+        var identification = Math.floor(Math.random() * 1000)
 
         props.onSubmit({
-            id: Math.floor(Math.random() * 1000),
+            id: identification,
             text: input
         });
 
         setInput('');
+        console.log(localStorage.getItem("username"))
         const newTask = {
-            title: input
+            id: identification,
+            text: input,
+            username: localStorage.getItem("username"),
+            isComplete: false 
         }
-        console.log(newTask)
+        console.log(newTask.username)
         axios.post("/dashboardlist/create-task", newTask)
+    };
+
+    const handleSubmit1 = e => {
+        e.preventDefault();
+        var identification = Math.floor(Math.random() * 1000)
+
+        props.onSubmit({
+            id: identification,
+            text: input
+        });
+
+        setInput('');
+        console.log(localStorage.getItem("username"))
+        const newTask = {
+            id: identification,
+            text: input,
+            username: localStorage.getItem("username"),
+            isComplete: false 
+        }
+        console.log(newTask.username)
     };
 
     return (
@@ -43,7 +68,7 @@ function Dashboardform(props) {
                 onChange={handleChange}
                 ref={inputRef}
             />
-            <button id="test" onClick={handleSubmit} className="task-button edit">Update</button>
+            <button id="test" onClick={handleSubmit1} className="task-button edit">Update</button>
             </>
             ) :
             (

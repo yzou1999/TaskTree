@@ -94,7 +94,7 @@ class Dashboard extends Component {
                         <div className="col-9">
                           <h3 className="f-w-300 d-flex align-items-center m-b-0">
                             <i className="feather icon-arrow-up text-c-green f-30 m-r-5" />{" "}
-                            0
+                            {this.state.currentUser.tasksCompleted}
                           </h3>
                         </div>
                       </div>
